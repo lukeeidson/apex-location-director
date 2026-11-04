@@ -15,3 +15,4 @@ windows/src-tauri/gen/
 .vscode/
 .swarm/
 .hive-mind/
+license-signing-key.txt

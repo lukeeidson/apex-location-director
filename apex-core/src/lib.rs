@@ -26,6 +26,7 @@ use idevice::{
 use plist::{Dictionary, Value};
 
 pub mod ffi;
+pub mod license;
 pub mod usb;
 
 const SERVICE: &str = "com.apple.coredevice.locationservice";

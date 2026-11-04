@@ -145,3 +145,24 @@ html, body {
   width: 16px; height: 16px; border-radius: 50%;
   background: #a855f7; border: 3px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.5);
 }
+
+/* License gate */
+#license-overlay {
+  position: absolute; inset: 0; z-index: 3000;
+  background: rgba(0,0,0,0.75);
+  display: flex; align-items: center; justify-content: center;
+}
+#license-modal {
+  width: min(440px, calc(100% - 32px));
+  background: var(--bg); border: 1px solid var(--line); border-radius: 16px;
+  padding: 26px 26px; text-align: center;
+}
+#license-modal h2 { margin: 0 0 8px; }
+#license-input {
+  width: 100%; margin: 16px 0 6px; padding: 11px 12px;
+  border-radius: 10px; border: 1px solid var(--line);
+  background: rgba(255,255,255,0.06); color: var(--text); font-size: 14px; text-align: center;
+}
+#license-error { min-height: 18px; margin-bottom: 10px; }
+#license-error.error { color: #fca5a5; }
+#license-activate { padding: 11px 28px; border-radius: 10px; border: 0; color: white; cursor: pointer; font-size: 15px; font-weight: 600; }

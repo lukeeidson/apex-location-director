@@ -58,6 +58,12 @@ async fn clear(udid: String) -> Value {
     apex_core::usb::handle(json!({ "op": "clear", "udid": udid })).await
 }
 
+/// Check a license key against the embedded public key. Offline, instant.
+#[tauri::command]
+fn verify_license(key: String) -> bool {
+    apex_core::license::verify(&key)
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -70,6 +76,7 @@ pub fn run() {
             set_location,
             play_route,
             clear,
+            verify_license,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

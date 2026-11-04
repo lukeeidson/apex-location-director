@@ -401,10 +401,40 @@ document.getElementById("btn-prepare").onclick = async () => {
 
 function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 
+// ---------- license gate ----------
+
+const licenseOverlay = document.getElementById("license-overlay");
+const licenseInput = document.getElementById("license-input");
+const licenseError = document.getElementById("license-error");
+
+async function verifyKey(key) {
+  try { return await invoke("verify_license", { key }); } catch { return false; }
+}
+
+async function startApp() {
+  licenseOverlay.classList.add("hidden");
+  refreshBookmarks();
+  await refreshDevices();
+  if (!phones.length || !currentPhone()?.paired) { overlay.classList.remove("hidden"); startPolling(); }
+}
+
+document.getElementById("license-activate").onclick = async () => {
+  const key = licenseInput.value.trim();
+  if (!key) return;
+  if (await verifyKey(key)) {
+    localStorage.setItem("license", key);
+    startApp();
+  } else {
+    licenseError.textContent = "That key isn't valid. Check it and try again.";
+    licenseError.className = "error";
+  }
+};
+licenseInput.addEventListener("keydown", (e) => { if (e.key === "Enter") document.getElementById("license-activate").click(); });
+
 // ---------- init ----------
 
-refreshBookmarks();
 (async () => {
-  await refreshDevices();
-  if (!phones.length || !currentPhone()?.paired) overlay.classList.remove("hidden"), startPolling();
+  const saved = localStorage.getItem("license");
+  if (saved && (await verifyKey(saved))) startApp();
+  else licenseOverlay.classList.remove("hidden");
 })();
