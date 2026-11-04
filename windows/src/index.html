@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apex Location Director</title>
+    <link rel="stylesheet" href="vendor/leaflet.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- Search -->
+    <div id="search-bar">
+      <input id="search-input" type="text" placeholder="Search a place or paste coordinates" autocomplete="off" spellcheck="false" />
+      <button id="search-clear" title="Clear">✕</button>
+    </div>
+    <div id="search-results" class="hidden"></div>
+
+    <!-- Control panel -->
+    <div id="panel">
+      <div id="status-row">
+        <span id="status">Connect an iPhone to begin.</span>
+        <div id="panel-actions">
+          <select id="bookmark-menu" title="Saved places"></select>
+          <button id="bookmark-save" title="Save pin as bookmark">★</button>
+          <button id="setup-open" title="Setup">⚙</button>
+        </div>
+      </div>
+
+      <div id="mode-row">
+        <label><input type="radio" name="mode" value="walk" /> Walk</label>
+        <label><input type="radio" name="mode" value="run" /> Run</label>
+        <label><input type="radio" name="mode" value="cycle" /> Cycle</label>
+        <label><input type="radio" name="mode" value="drive" checked /> Drive</label>
+      </div>
+
+      <div id="button-row">
+        <button id="btn-teleport" class="primary">Teleport</button>
+        <button id="btn-go" class="go">Go</button>
+        <button id="btn-reset" class="danger">Reset</button>
+      </div>
+    </div>
+
+    <!-- Setup modal -->
+    <div id="setup-overlay" class="hidden">
+      <div id="setup-modal">
+        <h2>Connect an iPhone</h2>
+        <p class="muted">
+          Windows needs Apple's driver to see the iPhone. If the phone doesn't appear,
+          install the <b>Apple Devices</b> app (or iTunes) from the Microsoft Store, then plug the phone in and unlock it.
+        </p>
+
+        <label class="field">
+          <span>iPhone</span>
+          <select id="device-select"></select>
+        </label>
+        <div id="device-note" class="muted"></div>
+
+        <ol id="setup-steps">
+          <li id="step-pair">
+            <b>1 · Trust this computer</b>
+            <div class="muted">Unlock the iPhone. When it asks "Trust This Computer?", tap Trust and enter the passcode.</div>
+            <button id="btn-pair">Pair</button>
+            <span class="step-status" id="status-pair"></span>
+          </li>
+          <li id="step-devmode">
+            <b>2 · Turn on Developer Mode</b>
+            <div class="muted">Click, then on the iPhone: Settings → Privacy &amp; Security → Developer Mode → on, and restart. After it restarts, unlock and tap Turn On.</div>
+            <button id="btn-devmode">Show the switch on the iPhone</button>
+            <span class="step-status" id="status-devmode"></span>
+          </li>
+          <li id="step-prepare">
+            <b>3 · Prepare the iPhone</b>
+            <div class="muted">Installs Apple's developer image. Needs internet. Repeat after the iPhone restarts.</div>
+            <button id="btn-prepare">Prepare</button>
+            <span class="step-status" id="status-prepare"></span>
+          </li>
+        </ol>
+
+        <div id="setup-footer">
+          <span id="setup-status" class="muted"></span>
+          <button id="setup-done" class="primary">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="vendor/leaflet.js"></script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

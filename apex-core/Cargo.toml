@@ -1,0 +1,26 @@
+[package]
+name = "apex-core"
+version = "0.1.0"
+edition = "2024"
+description = "Sets a persistent simulated location on an iPhone via com.apple.coredevice.locationservice"
+
+[lib]
+crate-type = ["rlib", "staticlib"]
+
+[dependencies]
+# Pinned to the commit this was written and tested against.
+idevice = { git = "https://github.com/jkcoxson/idevice", rev = "8970209", default-features = false, features = [
+    "ring",
+    "core_device",
+    "core_device_proxy",
+    "cryptexd",
+    "rsd",
+    "tunnel_tcp_stack",
+    "usbmuxd",
+    "tcp",
+    "amfi",
+    "pair",
+] }
+serde_json = "1"
+plist = "1.8"
+tokio = { version = "1.43", features = ["rt-multi-thread", "macros", "net", "time", "fs", "sync"] }

@@ -1,0 +1,17 @@
+secrets/
+apex-core/target/
+ios/build/
+*.xcodeproj/xcuserdata/
+.venv/
+__pycache__/
+ios/Resources/DDI/
+dist/
+reflector/
+windows/node_modules/
+windows/src-tauri/target/
+windows/src-tauri/gen/
+.DS_Store
+.claude-flow/
+.vscode/
+.swarm/
+.hive-mind/
